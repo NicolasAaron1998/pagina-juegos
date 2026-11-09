@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Colección de Juegos</title>
+  <style>
+    :root {
+      --bg: #121318;
+      --card-bg: #1c1e26;
+      --accent: #5c7cfa;
+      --accent-hover: #4263eb;
+      --text: #f8f9fa;
+      --text-muted: #909296;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.85rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #2c2e38;
+      background: var(--card-bg);
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(92, 124, 250, 0.25);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid #2c2e38;
+      border-radius: 12px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-thumb {
+      height: 130px;
+      background: #252834;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .card-body {
+      padding: 1.2rem;
+    }
+
+    .card-body h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-body span {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Zona de Juegos</h1>
+    <p>Haz clic en cualquiera de los títulos para comenzar a jugar.</p>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="buscador" placeholder="Buscar un juego..." oninput="filtrarJuegos()">
+  </div>
+
+  <div class="grid" id="juegosContainer">
+    <!-- Juego 1: Fleeing the Complex -->
+    <a href="game/fleeing-the-complex/" class="card" data-title="fleeing the complex henry stickmin">
+      <div class="card-thumb">🎮</div>
+      <div class="card-body">
+        <h3>Fleeing the Complex</h3>
+        <span>Henry Stickmin • Flash</span>
+      </div>
+    </a>
+
+    <!-- Juego 2: Riddle School 5 -->
+    <a href="game/riddleschool5/" class="card" data-title="riddle school 5">
+      <div class="card-thumb">🕹️</div>
+      <div class="card-body">
+        <h3>Riddle School 5</h3>
+        <span>JonBro • Aventura</span>
+      </div>
+    </a>
+  </div>
+
+  <script>
+    function filtrarJuegos() {
+      const query = document.getElementById('buscador').value.toLowerCase();
+      const cards = document.querySelectorAll('.card');
+      
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title');
+        card.style.display = title.includes(query) ? 'flex' : 'none';
+      });
+    }
+  </script>
+
+</body>
+</html>

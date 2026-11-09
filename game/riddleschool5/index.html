@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego Flash</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: #0d0e12;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .top-bar {
+      height: 52px;
+      background: #181920;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.2rem;
+      border-bottom: 1px solid #282a36;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      background: #252836;
+      color: #e2e8f0;
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid #3b3e4f;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn:hover {
+      background: #323648;
+      border-color: #5c7cfa;
+    }
+
+    .game-area {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #050608;
+      width: 100%;
+      height: calc(100vh - 52px);
+    }
+
+    #player-container {
+      width: 100%;
+      height: 100%;
+      max-width: 960px;
+      max-height: 720px;
+      display: flex;
+    }
+
+    ruffle-player, embed {
+      width: 100% !important;
+      height: 100% !important;
+      border: none;
+    }
+  </style>
+
+  <!-- Emulador Ruffle vía CDN oficial -->
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+</head>
+<body>
+
+  <div class="top-bar">
+    <a href="../../" class="btn">← Volver al Menú</a>
+    <button class="btn" onclick="activarPantallaCompleta()">⛶ Pantalla Completa</button>
+  </div>
+
+  <div class="game-area" id="gameArea">
+    <div id="player-container">
+      <!-- Asegúrate de que el archivo .swf esté en esta misma carpeta y se llame game.swf -->
+      <embed src="game.swf" width="100%" height="100%">
+    </div>
+  </div>
+
+  <script>
+    function activarPantallaCompleta() {
+      const area = document.getElementById('gameArea');
+      if (!document.fullscreenElement) {
+        area.requestFullscreen().catch(err => alert("Error al entrar a pantalla completa"));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+  </script>
+
+</body>
+</html>
